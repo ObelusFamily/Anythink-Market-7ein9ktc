@@ -7,6 +7,7 @@ services:
 
     environment:
       - NODE_ENV=development
+      - OPENAI_API_KEY=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
       - PORT=3000
       - MONGODB_URI=mongodb://mongodb-node:27017/anythink-market
       - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
