@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('axios')
 
 export const generateImage = async(prompt) => {
     return await axios.post('https://api.openai.com/v1/images/generations', JSON.stringify({
