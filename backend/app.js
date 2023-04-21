@@ -1,14 +1,14 @@
 require("dotenv").config();
-var http = require("http"),
-  path = require("path"),
-  methods = require("methods"),
-  express = require("express"),
-  bodyParser = require("body-parser"),
-  session = require("express-session"),
-  cors = require("cors"),
-  passport = require("passport"),
-  errorhandler = require("errorhandler"),
-  mongoose = require("mongoose");
+import http from "http";
+import path from "path";
+import methods from "methods";
+import express from "express";
+import { urlencoded, json } from "body-parser";
+import session from "express-session";
+import cors from "cors";
+import passport from "passport";
+import errorhandler from "errorhandler";
+import { connect, set } from "mongoose";
 
 var isProduction = process.env.NODE_ENV === "production";
 
@@ -19,11 +19,11 @@ app.use(cors());
 
 // Normal express config defaults
 app.use(require("morgan")("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 app.use(require("method-override")());
-app.use(express.static(__dirname + "/public"));
+app.use((__dirname + "/public"));
 
 app.use(
   session({
@@ -42,16 +42,16 @@ if (!process.env.MONGODB_URI) {
   console.warn("Missing MONGODB_URI in env, please add it to your .env file");
 }
 
-mongoose.connect(process.env.MONGODB_URI);
+connect(process.env.MONGODB_URI);
 if (isProduction) {
 } else {
-  mongoose.set("debug", true);
+  set("debug", true);
 }
 
-require("./models/User");
-require("./models/Item");
-require("./models/Comment");
-require("./config/passport");
+import "./models/User";
+import "./models/Item";
+import "./models/Comment";
+import "./config/passport";
 
 app.use(require("./routes"));
 
